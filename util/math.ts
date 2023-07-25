@@ -2,7 +2,7 @@
     Based on the Gauss-Legendre algorithm described in the paper "Spigot Algorithms for the Digits of Pi" by Jeremy Gibbons and David R. Lester.
     https://www.cs.ox.ac.uk/jeremy.gibbons/publications/spigot.pdf
 */
-function * generateDigitsOfPi() {
+export function * generateDigitsOfPi() {
     let q = 1n;
     let r = 180n;
     let t = 60n;
