@@ -6,7 +6,7 @@ import { generateDigitsOfPi } from '@/util/math';
 
 export default function Home() {
   const [pi, dispatch] = useReducer((state : any, action : any) => {
-    if (action.type === 'ADD_DIGITS') {
+    if (action.type === 'ADD_DIGIT') {
       return state + action.payload;
     }
     return state;
@@ -15,14 +15,13 @@ export default function Home() {
   useEffect(() => {
     const iter = generateDigitsOfPi();
 
-    function displayTenNextDigits() {
-      let digits = '';
-      for (let i = 0; i < 10; i++) digits += iter.next().value;
-      dispatch({ type: 'ADD_DIGITS', payload: digits });
-      requestAnimationFrame(displayTenNextDigits);
+    function displayNextDigit() {
+      const digit = iter.next().value;
+      dispatch({ type: 'ADD_DIGIT', payload: digit });
+      requestAnimationFrame(displayNextDigit);
     }
 
-    displayTenNextDigits();
+    displayNextDigit();
   }, []);
 
   return (
@@ -39,6 +38,7 @@ export default function Home() {
           <FaChevronDown className='mb-16 text-3xl float' />
         </div>
       </div>
+      <h1 className='text-center font-semibold text-xl mb-4'>{pi.length} digits of pi</h1>
       <div className='break-all font-semibold'>
         {pi}
       </div>
